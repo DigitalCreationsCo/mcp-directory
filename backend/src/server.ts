@@ -5,6 +5,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import mcpRoutes from './routes/mcp';
+import cronRoutes from './routes/cron';
 
 dotenv.config();
 
@@ -12,7 +13,9 @@ const app = express();
 
 // Security Middleware
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+  origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN?.split(',') : '*'
+}));
 
 // Rate Limiting
 const limiter = rateLimit({
@@ -36,6 +39,7 @@ const prisma = new PrismaClient({
 app.use(express.json());
 
 app.use('/api/mcp', mcpRoutes);
+app.use('/api/cron', cronRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello from the AI SaaS Platform Backend!');

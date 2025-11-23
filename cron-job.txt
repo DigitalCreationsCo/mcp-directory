@@ -1,0 +1,11 @@
+// cron-job.js
+// This script is intended to be run by an external cron service (e.g. every hour).
+// It triggers the cron API which is a proxy to scraper API.
+
+url "https://mcp-backend-tau.vercel.app/api/cron"
+method: 'GET'
+headers: {
+  'Content-Type': 'application/json',
+  'Authorization': `Bearer ${CRON_SECRET}`
+},
+});

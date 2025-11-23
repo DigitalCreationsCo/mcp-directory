@@ -190,9 +190,10 @@ export class McpSearch extends LitElement {
   private async fetchServers() {
     this.loading = true;
     try {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000/api/mcp';
       const url = this.searchQuery 
-        ? `http://localhost:3000/api/mcp?q=${encodeURIComponent(this.searchQuery)}`
-        : 'http://localhost:3000/api/mcp';
+        ? `${apiUrl}?q=${encodeURIComponent(this.searchQuery)}`
+        : apiUrl;
       
       const response = await fetch(url);
       if (!response.ok) throw new Error('Failed to fetch servers');
