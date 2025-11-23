@@ -1,0 +1,87 @@
+@import '@shoelace-style/shoelace/dist/themes/dark.css';
+
+:root {
+  /* Deep Space & Neon Cyan Theme */
+  --brand-primary: #00f3ff;
+  --brand-secondary: #7000ff;
+  --brand-bg-deep: #050510;
+  --brand-bg-panel: rgba(20, 20, 40, 0.7);
+  
+  /* Shoelace Overrides */
+  --sl-color-primary-50: #f0fdff;
+  --sl-color-primary-100: #cff9ff;
+  --sl-color-primary-200: #9ef4ff;
+  --sl-color-primary-300: #6eefff;
+  --sl-color-primary-400: #3de9ff;
+  --sl-color-primary-500: #00f3ff; /* Main Neon Cyan */
+  --sl-color-primary-600: #00c2cc;
+  --sl-color-primary-700: #009199;
+  --sl-color-primary-800: #006166;
+  --sl-color-primary-900: #003033;
+
+  /* Dark Backgrounds */
+  --sl-color-neutral-50: #0b0b15;
+  --sl-color-neutral-100: #151525;
+  --sl-color-neutral-200: #202035;
+  --sl-color-neutral-300: #2a2a45;
+  --sl-color-neutral-400: #353555;
+  --sl-color-neutral-500: #505070;
+  --sl-color-neutral-600: #8080a0;
+  --sl-color-neutral-700: #a0a0c0;
+  --sl-color-neutral-800: #c0c0e0;
+  --sl-color-neutral-900: #e0e0ff;
+  --sl-color-neutral-950: #ffffff;
+
+  --sl-font-sans: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: var(--brand-bg-deep);
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(112, 0, 255, 0.15) 0%, transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(0, 243, 255, 0.15) 0%, transparent 25%);
+  color: var(--sl-color-neutral-900);
+  font-family: var(--sl-font-sans);
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Holographic Card Effect */
+.holographic-card {
+  background: var(--brand-bg-panel);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 243, 255, 0.2);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    0 0 15px rgba(0, 243, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.holographic-card:hover {
+  border-color: rgba(0, 243, 255, 0.5);
+  box-shadow: 
+    0 10px 15px -3px rgba(0, 0, 0, 0.2),
+    0 0 25px rgba(0, 243, 255, 0.2);
+}
+
+/* Glowing Text */
+.glow-text {
+  text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--brand-bg-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--sl-color-neutral-600);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-primary);
+}

@@ -1,0 +1,89 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    String @id @default(uuid())
+  email String @unique
+  name  String?
+
+  ownedWorkspaces Workspace[] @relation("WorkspaceOwner")
+  workspaces      WorkspaceMember[]
+}
+
+model Workspace {
+  id        String   @id @default(uuid())
+  name      String
+  slug      String   @unique
+  createdAt DateTime @default(now())
+
+  ownerId String
+  owner   User   @relation("WorkspaceOwner", fields: [ownerId], references: [id])
+
+  members WorkspaceMember[]
+  teams   Team[]
+  chats   Chat[]
+}
+
+model WorkspaceMember {
+  id          String   @id @default(uuid())
+  role        Role     @default(MEMBER)
+  invitedAt   DateTime @default(now())
+  joinedAt    DateTime?
+
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@unique([workspaceId, userId])
+}
+
+model Team {
+  id          String @id @default(uuid())
+  name        String
+  
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+}
+
+model Chat {
+  id          String   @id @default(uuid())
+  title       String
+  createdAt   DateTime @default(now())
+  
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  MEMBER
+  VIEWER
+}
+
+model McpServer {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String
+  command     String
+  args        String[]
+  env         Json?
+  logoUrl     String?
+  rating      Float    @default(0)
+  tags        String[]
+  author      String?
+  sourceUrl   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
