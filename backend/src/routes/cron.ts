@@ -9,10 +9,12 @@ router.get('/', cronAuth, async (req, res) => {
   const CRON_SECRET = process.env.CRON_SECRET || 'change_me_to_a_secure_random_string';
 
   const URLS_TO_SCRAPE = [
-    'https://github.com/topics/mcp-server',
-    'https://github.com/topics/model-context-protocol',
-    'https://www.npmjs.com/search?q=mcp-server',
-    'https://github.com/modelcontextprotocol/servers'
+    'https://mcp.so/?tab=latest',
+    'https://mcpservers.org/',
+    'https://glama.ai/mcp/servers',
+    'https://github.com/punkpeye/awesome-mcp-servers',
+    'https://github.com/modelcontextprotocol/servers?tab=readme-ov-file',
+    'https://cline.bot/mcp-marketplace',
   ];
 
   // Round Robin Selection based on the current hour

@@ -1,10 +1,9 @@
 import express from 'express';
-import { PrismaClient } from '@prisma/client';
 import { addScrapeJob } from '../scraper/queue';
 import { cronAuth } from '../middleware/cronAuth';
+import { prisma } from '../db';
 
 const router = express.Router();
-const prisma = new PrismaClient();
 
 // Get all MCP servers (with optional search)
 router.get('/', async (req, res) => {

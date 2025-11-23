@@ -1,5 +1,4 @@
 import express from 'express';
-import { PrismaClient } from '@prisma/client';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -27,8 +26,6 @@ const limiter = rateLimit({
 app.use(limiter);
 
 const port = process.env.PORT || 3000;
-
-const prisma = new PrismaClient();
 
 app.use(express.json());
 

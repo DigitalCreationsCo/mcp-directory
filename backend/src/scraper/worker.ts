@@ -1,10 +1,8 @@
 import { Worker } from 'bullmq';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
-import { McpServer, PrismaClient } from '@prisma/client';
 import { parseMcpServers } from './llm';
-
-const prisma = new PrismaClient();
+import { prisma } from '../db';
 
 const connection = {
   host: process.env.REDIS_HOST || 'localhost',
