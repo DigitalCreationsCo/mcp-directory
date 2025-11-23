@@ -30,10 +30,10 @@ export const workFer = new Worker('scraper-queue', async job => {
     const textContent = $('body').text().replace(/\s+/g, ' ').trim();
 
     // 2. Fetch Existing Servers for Deduplication
-    const existing = await prisma.mcpServer.findMany<McpServer>({
+    const existing = await prisma.mcpServer.findMany({
       select: { name: true }
     });
-    const existingNames = existing.map((e:McpServer) => e.name);
+    const existingNames = existing.map((e) => e.name);
 
     // 3. Use LLM to Parse and Deduplicate
     const newServers = await parseMcpServers(url, textContent, existingNames);

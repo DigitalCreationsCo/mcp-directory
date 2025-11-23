@@ -15,8 +15,8 @@ router.get('/', async (req, res) => {
       where: q
         ? {
             OR: [
-              { name: { contains: String(q), mode: 'insensitive' } } as any,
-              { description: { contains: String(q), mode: 'insensitive' } } as any,
+              { name: { contains: String(q), mode: 'insensitive' } },
+              { description: { contains: String(q), mode: 'insensitive' } },
             ],
           }
         : undefined,

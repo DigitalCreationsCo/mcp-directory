@@ -27,13 +27,7 @@ const limiter = (0, express_rate_limit_1.default)({
 });
 app.use(limiter);
 const port = process.env.PORT || 3000;
-const prisma = new client_1.PrismaClient({
-    datasources: {
-        db: {
-            url: process.env.DATABASE_URL,
-        },
-    },
-});
+const prisma = new client_1.PrismaClient();
 app.use(express_1.default.json());
 app.use('/api/mcp', mcp_1.default);
 app.use('/api/cron', cron_1.default);

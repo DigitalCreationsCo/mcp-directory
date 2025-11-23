@@ -28,13 +28,7 @@ app.use(limiter);
 
 const port = process.env.PORT || 3000;
 
-const prisma = new PrismaClient({
-  datasources: {
-    db: {
-      url: process.env.DATABASE_URL,
-    },
-  },
-});
+const prisma = new PrismaClient();
 
 app.use(express.json());
 
