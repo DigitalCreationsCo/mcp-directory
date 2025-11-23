@@ -1,7 +1,7 @@
 import { Worker } from 'bullmq';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
-import { PrismaClient } from '@prisma/client';
+import { McpServer, PrismaClient } from '@prisma/client';
 import { parseMcpServers } from './llm';
 
 const prisma = new PrismaClient();
@@ -30,10 +30,10 @@ export const workFer = new Worker('scraper-queue', async job => {
     const textContent = $('body').text().replace(/\s+/g, ' ').trim();
 
     // 2. Fetch Existing Servers for Deduplication
-    const existing = await prisma.mcpServer.findMany({
+    const existing = await prisma.mcpServer.findMany<McpServer>({
       select: { name: true }
     });
-    const existingNames = existing.map(e => e.name);
+    const existingNames = existing.map((e:McpServer) => e.name);
 
     // 3. Use LLM to Parse and Deduplicate
     const newServers = await parseMcpServers(url, textContent, existingNames);
